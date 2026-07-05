@@ -1,4 +1,5 @@
 
+import 'package:cbs_erp_project/network/support/share_preference.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -6,21 +7,16 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../errors/app_exception.dart';
 import 'api_constants.dart';
 
-/// ---------------------------------------------------------------------------
-/// Dio instance provider
-/// ---------------------------------------------------------------------------
+
 final dioClientProvider = Provider<DioClient>((ref) {
   return DioClient();
 });
 
-/// ---------------------------------------------------------------------------
-/// DioClient — wraps Dio with interceptors and unified error mapping
-/// ---------------------------------------------------------------------------
 class DioClient {
   DioClient() {
     _dio = Dio(
       BaseOptions(
-        baseUrl: ApiConstants.baseUrl,
+        baseUrl: SharedPreferenceManager.baseUrl,
         connectTimeout: ApiConstants.connectTimeout,
         receiveTimeout: ApiConstants.receiveTimeout,
         sendTimeout: ApiConstants.sendTimeout,
@@ -32,6 +28,7 @@ class DioClient {
     );
 
     _dio.interceptors.addAll([
+      _BaseUrlInterceptor(),
       _AuthInterceptor(),
       _RetryInterceptor(dio: _dio),
       PrettyDioLogger(
@@ -47,7 +44,6 @@ class DioClient {
 
   late final Dio _dio;
 
-  // ── GET ──────────────────────────────────────────────────────────────────
   Future<Response<T>> get<T>(
     String path, {
     Map<String, dynamic>? queryParameters,
@@ -66,7 +62,6 @@ class DioClient {
     }
   }
 
-  // ── POST ─────────────────────────────────────────────────────────────────
   Future<Response<T>> post<T>(
     String path, {
     Object? data,
@@ -87,7 +82,6 @@ class DioClient {
     }
   }
 
-  // ── PUT ──────────────────────────────────────────────────────────────────
   Future<Response<T>> put<T>(
     String path, {
     Object? data,
@@ -108,7 +102,6 @@ class DioClient {
     }
   }
 
-  // ── PATCH ────────────────────────────────────────────────────────────────
   Future<Response<T>> patch<T>(
     String path, {
     Object? data,
@@ -129,7 +122,6 @@ class DioClient {
     }
   }
 
-  // ── DELETE ───────────────────────────────────────────────────────────────
   Future<Response<T>> delete<T>(
     String path, {
     Object? data,
@@ -150,7 +142,6 @@ class DioClient {
     }
   }
 
-  // ── Error Mapper ─────────────────────────────────────────────────────────
   AppException _mapDioException(DioException e) {
     switch (e.type) {
       case DioExceptionType.connectionTimeout:
@@ -185,9 +176,20 @@ class DioClient {
   }
 }
 
-/// ---------------------------------------------------------------------------
-/// Auth Interceptor — attach tokens, refresh on 401
-/// ---------------------------------------------------------------------------
+class _BaseUrlInterceptor extends Interceptor {
+  @override
+  void onRequest(
+      RequestOptions options,
+      RequestInterceptorHandler handler,
+      ) async {
+    final savedUrl = await SharedPreferenceManager.getBaseUrl();
+    if (savedUrl.isNotEmpty) {
+      options.baseUrl = savedUrl;
+    }
+    handler.next(options);
+  }
+}
+
 class _AuthInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
@@ -200,21 +202,11 @@ class _AuthInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     if (err.response?.statusCode == 401) {
-      // TODO: Refresh token logic here
-      // try {
-      //   final newToken = await AuthService.refreshToken();
-      //   err.requestOptions.headers['Authorization'] = 'Bearer $newToken';
-      //   final cloned = await Dio().fetch(err.requestOptions);
-      //   return handler.resolve(cloned);
-      // } catch (_) { /* logout */ }
     }
     handler.next(err);
   }
 }
 
-/// ---------------------------------------------------------------------------
-/// Retry Interceptor — retry transient failures up to [maxRetries] times
-/// ---------------------------------------------------------------------------
 class _RetryInterceptor extends Interceptor {
   _RetryInterceptor({required this.dio, this.maxRetries = 1});
 

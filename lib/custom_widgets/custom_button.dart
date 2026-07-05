@@ -20,7 +20,7 @@ class CustomButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Center(
-          child: CustomTextView.normalTextView(txt, Colors.white, false),
+          child: Text(txt, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold), textScaler: TextScaler.linear(1.1),),
         ),
       ),
     );

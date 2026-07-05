@@ -1,4 +1,5 @@
 import 'package:cbs_erp_project/custom_widgets/custom_text_view.dart';
+import 'package:cbs_erp_project/network/support/share_preference.dart';
 import 'package:cbs_erp_project/screens/login_screen/login_screen.dart';
 import 'package:cbs_erp_project/themes/app_colors.dart';
 import 'package:cbs_erp_project/widgets/network_aware_wrapper.dart';
@@ -36,10 +37,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   final PageController _pageController = PageController();
   int currentPage = 0;
-
+  String loginPin = '';
   @override
   void initState() {
+    loadLoginPin();
     super.initState();
+  }
+  loadLoginPin() async{
+    loginPin = await SharedPreferenceManager.getLoginPin();
   }
 
   @override
@@ -68,7 +73,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       onTap: () {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => LoginScreen()),
+                          MaterialPageRoute(builder: (context) => LoginScreen(loginPin: loginPin,)),
                         );
                       },
                       child: Align(
@@ -175,7 +180,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => LoginScreen(),
+                                  builder: (context) => LoginScreen(loginPin: loginPin,),
                                 ),
                               );
                             }

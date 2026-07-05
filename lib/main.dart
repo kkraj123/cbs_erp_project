@@ -1,12 +1,15 @@
 import 'package:cbs_erp_project/custom_widgets/custom_text_view.dart';
+import 'package:cbs_erp_project/network/support/share_preference.dart';
 import 'package:cbs_erp_project/onboarding_screen.dart';
+import 'package:cbs_erp_project/screens/login_screen/login_screen.dart';
 import 'package:cbs_erp_project/themes/app_colors.dart';
 import 'package:cbs_erp_project/widgets/network_aware_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const ProviderScope(child: const MyApp()));
 }
 
@@ -34,15 +37,39 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  String loginPin = '';
+
   @override
   void initState() {
     super.initState();
+    loadLoginPin();
     Future.delayed(Duration(seconds: 5), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => OnboardingScreen()),
       );
+      _checkOnboardingStatus();
     });
+  }
+
+  loadLoginPin() async {
+    loginPin = await SharedPreferenceManager.getLoginPin();
+  }
+
+  Future<void> _checkOnboardingStatus() async {
+    bool hasSeenOnboarding =
+        await SharedPreferenceManager.getFirstCallOnboarding();
+    if (!hasSeenOnboarding) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const OnboardingScreen()),
+      );
+      return;
+    }
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => LoginScreen(loginPin: loginPin)),
+    );
   }
 
   @override
@@ -73,7 +100,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             const SizedBox(height: 10),
             CustomTextView.largeTextView(
-              "CBS ERP",
+              "Balance ERP",
               AppColors.colorWhite,
               false,
             ),
@@ -126,7 +153,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
                 const SizedBox(width: 5),
                 CustomTextView.normalTextView(
-                  "Info Developers",
+                  "Infobrain Technologies",
                   Colors.white,
                   false,
                 ),

@@ -63,7 +63,11 @@ class _NetworkAwareWrapperState extends ConsumerState<NetworkAwareWrapper> {
     if (!_isDialogShowing || !context.mounted) return;
     Navigator.of(context, rootNavigator: true).pop();
     _isDialogShowing = false;
-    _showBackOnlineSnackbar();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        _showBackOnlineSnackbar();
+      }
+    });
   }
 
   void _showBackOnlineSnackbar() {
