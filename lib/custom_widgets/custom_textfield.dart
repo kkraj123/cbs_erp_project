@@ -54,7 +54,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               fontWeight: FontWeight.w600,
               color: _isFocused
                   ? widget.focusedBorderColor
-                  : const Color(0xFF424242),
+                  : Colors.white,
             ),
           ),
           const SizedBox(height: 6),

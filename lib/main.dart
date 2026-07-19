@@ -75,7 +75,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryColors,
+      backgroundColor: AppColors.secondaryColor,
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -86,9 +86,9 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 70,
               width: 70,
               decoration: BoxDecoration(
-                border: Border.all(width: 1, color: Colors.black),
+                border: Border.all(width: 1, color: AppColors.secondaryColor),
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
+                color: AppColors.colorWhite,
               ),
               child: Center(
                 child: Icon(
@@ -107,7 +107,7 @@ class _SplashScreenState extends State<SplashScreen> {
             const SizedBox(height: 5),
             CustomTextView.normalTextView(
               'PROCUREMENT & SALES',
-              Colors.white70,
+              AppColors.colorWhite,
               false,
             ),
           ],
@@ -129,7 +129,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     backgroundColor: Colors.grey,
                     borderRadius: BorderRadius.circular(20),
                     valueColor: const AlwaysStoppedAnimation<Color>(
-                      Colors.white,
+                      AppColors.colorWhite,
                     ),
                   );
                 },
@@ -148,7 +148,7 @@ class _SplashScreenState extends State<SplashScreen> {
               children: [
                 CustomTextView.normalTextView(
                   "Powered by",
-                  Colors.black54,
+                  AppColors.secondaryColor,
                   false,
                 ),
                 const SizedBox(width: 5),

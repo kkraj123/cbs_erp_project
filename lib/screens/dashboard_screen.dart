@@ -3,10 +3,15 @@ import 'package:cbs_erp_project/custom_widgets/custom_text_view.dart';
 import 'package:cbs_erp_project/custom_widgets/custom_textfield.dart';
 import 'package:cbs_erp_project/network/support/dialog_manager.dart';
 import 'package:cbs_erp_project/network/support/share_preference.dart';
+import 'package:cbs_erp_project/screens/home_screen/home_screen.dart';
 import 'package:cbs_erp_project/screens/login_screen/model/UserLoginModel.dart';
 import 'package:cbs_erp_project/screens/login_screen/model/auth_model.dart';
+import 'package:cbs_erp_project/screens/report_screen/report_screen.dart';
+import 'package:cbs_erp_project/screens/transaction_screen/transaction_screen.dart';
 import 'package:cbs_erp_project/themes/app_colors.dart';
 import 'package:flutter/material.dart';
+
+import 'more_screen/more_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   final AuthModel responseData;
@@ -30,10 +35,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
   String loginPin = '';
   String finalDeviceToken = '';
   int _currentIndex = 0;
+  late List<Widget> screens;
+
 
   @override
   void initState() {
     super.initState();
+    screens = [HomeScreen(authModel: widget.responseData,), TransactionScreen(authModel: widget.responseData), ReportScreen(authModel: widget.responseData), MoreScreen(authModel: widget.responseData)];
     loadLoginPin();
   }
 
@@ -54,14 +62,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return WillPopScope(
       onWillPop: () => DialogManager.showExitDialog(context),
       child: Scaffold(
-        backgroundColor: AppColors.backgroundColor,
-        body: Center(
-          child: CustomTextView.mediumTextView(
-            "Dashboard Screen",
-            Colors.black,
-            true,
-          ),
-        ),
+        backgroundColor: AppColors.colorWhite,
+        body: screens[_currentIndex],
         bottomNavigationBar: BorderBottomNavigationBar(
           height: 85,
           currentIndex: _currentIndex,
@@ -72,29 +74,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
             });
           },
           backgroundColor: AppColors.primaryColors,
-          selectedBackgroundColor: AppColors.backgroundColor,
+          selectedBackgroundColor: AppColors.colorWhite,
 
-          selectedLabelColor: Colors.black,
+          selectedLabelColor: AppColors.primaryColors,
           unselectedLabelColor: Colors.white,
           unselectedBackgroundColor: Colors.transparent,
           unselectedIconColor: Colors.white,
-          selectedIconColor: Colors.black,
+          selectedIconColor: AppColors.primaryColors,
           selectedIconSize: 25,
           unselectedIconSize: 25,
           customBottomNavItems: [
             BorderBottomNavigationItems(
               icon: Icons.dashboard,
-              label: 'Home',
+              label: 'Dashboard',
             ),
             BorderBottomNavigationItems(
-              icon: Icons.send_to_mobile_rounded,
-              label: 'Send',
+              icon: Icons.swap_horiz,
+              label: 'Transaction',
             ),
-            BorderBottomNavigationItems(
-              icon: Icons.file_copy,
-              label: 'Report',
-            ),
-            BorderBottomNavigationItems(icon: Icons.more_horiz, label: 'More'),
+            BorderBottomNavigationItems(icon: Icons.file_copy, label: 'Report'),
+            BorderBottomNavigationItems(icon: Icons.settings, label: 'Setting'),
           ],
         ),
       ),

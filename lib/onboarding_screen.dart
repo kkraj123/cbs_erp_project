@@ -161,7 +161,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
                                 color: currentPage == index
-                                    ? AppColors.primaryColors
+                                    ? AppColors.secondaryColor
                                     : Colors.grey,
                               ),
                             ),
@@ -191,6 +191,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             constraints: const BoxConstraints(maxWidth: 300),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
+                              border: Border.all(width: 2, color: AppColors.secondaryColor),
                               color: AppColors.primaryColors,
                             ),
                             child: Center(

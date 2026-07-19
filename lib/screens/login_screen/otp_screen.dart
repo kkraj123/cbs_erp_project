@@ -71,7 +71,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
     final apiState = ref.watch(loginViewModelProvider);
     final isLoading = apiState.isLoading;
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.secondaryColor,
       body: NetworkAwareWrapper(
         child: Stack(
           children: [
@@ -116,7 +116,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                       const SizedBox(height: 5),
                       CustomTextView.normalTextView(
                         "Enter the otp verification code sent to your registered email address.",
-                        Colors.black54,
+                        Colors.white,
                         true,
                       ),
                       CustomTextField(
@@ -159,7 +159,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                         },
                         child: CustomTextView.normalTextView(
                           "Cancel",
-                          Colors.black54,
+                          Colors.white,
                           false,
                         ),
                       ),

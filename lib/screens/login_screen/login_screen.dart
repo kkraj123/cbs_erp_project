@@ -13,7 +13,6 @@ import 'package:cbs_erp_project/screens/login_screen/provider/login_view_model.d
 import 'package:cbs_erp_project/themes/app_colors.dart';
 import 'package:cbs_erp_project/widgets/network_aware_wrapper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -136,7 +135,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final isLoading = apiState.isLoading;
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.secondaryColor,
       body: SingleChildScrollView(
         reverse: false,
         child: NetworkAwareWrapper(
@@ -160,10 +159,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             width: 60,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: AppColors.primaryColors,
+                              color: AppColors.boxColors.withAlpha(50),
                               border: Border.all(
                                 width: 1,
-                                color: AppColors.secondaryColor,
+                                color: AppColors.primaryColors,
                               ),
                             ),
                             child: Icon(
@@ -178,19 +177,19 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     const SizedBox(height: 10),
                     CustomTextView.largeTextView(
                       "Balance ERP",
-                      AppColors.primaryColors,
+                      AppColors.colorWhite,
                       false,
                     ),
                     const SizedBox(height: 5),
                     CustomTextView.mediumTextView(
                       "Welcome Back",
-                      Colors.black54,
+                      Colors.white,
                       false,
                     ),
                     const SizedBox(height: 5),
                     CustomTextView.normalTextView(
                       "Sign in to manage your procurement assets",
-                      Colors.black54,
+                      AppColors.boxColors,
                       false,
                     ),
                     const SizedBox(height: 10),
@@ -205,7 +204,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   width: 1,
                                   color: Colors.black12,
                                 ),
-                                color: AppColors.colorWhite,
+                                color: AppColors.primaryColors.withAlpha(100),
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black.withOpacity(0.1),
@@ -233,9 +232,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                           }
                                           return null;
                                         },
+                                        borderColor: AppColors.primaryColors,
                                       ),
                                       const SizedBox(height: 10),
                                       CustomTextField(
+                                        borderColor: AppColors.primaryColors,
                                         label: "Branch",
                                         hint: "Enter branch",
                                         prefixIcon: Icons.location_on,
@@ -249,6 +250,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                       ),
                                       const SizedBox(height: 10),
                                       CustomTextField(
+                                        borderColor: AppColors.primaryColors,
                                         label: "User Name",
                                         hint: "Enter user name",
                                         prefixIcon: Icons.person,
@@ -262,6 +264,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                       ),
                                       const SizedBox(height: 10),
                                       CustomTextField(
+                                        borderColor: AppColors.primaryColors,
                                         label: "Password",
                                         hint: "Enter password",
                                         prefixIcon: Icons.lock,
@@ -311,7 +314,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           child: Center(
             child: CustomTextView.normalTextView(
               'Infobrain Technologies Pvt. Ltd.',
-              AppColors.colorBlack,
+              AppColors.colorWhite,
               false,
             ),
           ),
