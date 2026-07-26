@@ -8,7 +8,7 @@ import 'package:cbs_erp_project/screens/dashboard_screen.dart';
 import 'package:cbs_erp_project/screens/login_screen/model/UserLoginModel.dart';
 import 'package:cbs_erp_project/screens/login_screen/model/auth_model.dart';
 import 'package:cbs_erp_project/screens/login_screen/otp_screen.dart';
-import 'package:cbs_erp_project/screens/login_screen/provider/login_provider.dart';
+import 'package:cbs_erp_project/screens/provider.dart';
 import 'package:cbs_erp_project/screens/login_screen/provider/login_view_model.dart';
 import 'package:cbs_erp_project/themes/app_colors.dart';
 import 'package:cbs_erp_project/widgets/network_aware_wrapper.dart';

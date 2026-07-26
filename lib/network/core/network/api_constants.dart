@@ -11,6 +11,7 @@ class ApiConstants {
   // Endpoints
   static String loginEndPoint  = '/v1/MobileAppApi/Login';
   static String optVerifyingEndPoint = '/v1/MobileAppApi/VerifyOTP';
+  static String getAllItemsEnd = '/api/ErpApi/GetAllItems';
 
 
 }

@@ -1,7 +1,7 @@
 import 'package:cbs_erp_project/network/core/errors/app_exception.dart';
 import 'package:cbs_erp_project/network/core/network/api_state.dart';
 import 'package:cbs_erp_project/screens/login_screen/model/auth_model.dart';
-import 'package:cbs_erp_project/screens/login_screen/provider/login_provider.dart';
+import 'package:cbs_erp_project/screens/provider.dart';
 import 'package:cbs_erp_project/screens/login_screen/provider/login_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -37,7 +37,7 @@ class LoginViewModel extends StateNotifier<ApiState<AuthModel>> {
     required String userName,
     required String password,
     required String deviceToken,
-    required String otp
+    required String otp,
   }) async {
     state = ApiState.loading();
     try {
@@ -46,7 +46,7 @@ class LoginViewModel extends StateNotifier<ApiState<AuthModel>> {
         userName: userName,
         password: password,
         deviceToken: deviceToken,
-        otpToken: otp
+        otpToken: otp,
       );
       state = ApiState.success(loginResponse);
     } on AppException catch (e) {
@@ -62,6 +62,6 @@ final authRepositoryProvider = Provider<LoginRepository>((ref) {
 });
 
 final loginViewModelProvider =
-StateNotifierProvider<LoginViewModel, ApiState<AuthModel>>((ref) {
-  return LoginViewModel(loginRepository: ref.watch(authRepositoryProvider));
-});
+    StateNotifierProvider<LoginViewModel, ApiState<AuthModel>>((ref) {
+      return LoginViewModel(loginRepository: ref.watch(authRepositoryProvider));
+    });

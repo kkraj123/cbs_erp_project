@@ -37,11 +37,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int _currentIndex = 0;
   late List<Widget> screens;
 
-
   @override
   void initState() {
     super.initState();
-    screens = [HomeScreen(authModel: widget.responseData,), TransactionScreen(authModel: widget.responseData), ReportScreen(authModel: widget.responseData), MoreScreen(authModel: widget.responseData)];
+    screens = [
+      HomeScreen(authModel: widget.responseData),
+      TransactionScreen(authModel: widget.responseData),
+      ReportScreen(authModel: widget.responseData),
+      MoreScreen(authModel: widget.responseData),
+    ];
     loadLoginPin();
   }
 
@@ -84,10 +88,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           selectedIconSize: 25,
           unselectedIconSize: 25,
           customBottomNavItems: [
-            BorderBottomNavigationItems(
-              icon: Icons.dashboard,
-              label: 'Dashboard',
-            ),
+            BorderBottomNavigationItems(icon: Icons.dashboard, label: 'Home'),
             BorderBottomNavigationItems(
               icon: Icons.swap_horiz,
               label: 'Transaction',

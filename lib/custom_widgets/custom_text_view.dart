@@ -26,7 +26,18 @@ class CustomTextView {
       textAlign: isCenter ? TextAlign.center : TextAlign.start,
     );
   }
-
+  static Widget mediumTextWithNormalView(String txt, Color color, bool isCenter) {
+    return Text(
+      txt,
+      style: TextStyle(
+        color: color,
+        fontFamily: 'Barlow',
+        fontWeight: FontWeight.normal,
+      ),
+      textScaler: TextScaler.linear(1.3),
+      textAlign: isCenter ? TextAlign.center : TextAlign.start,
+    );
+  }
   static Widget largeTextView(String txt, Color color, bool isCenter) {
     return Text(
       txt,
