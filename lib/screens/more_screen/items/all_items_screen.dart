@@ -3,6 +3,7 @@ import 'package:cbs_erp_project/network/core/network/api_state.dart';
 import 'package:cbs_erp_project/screens/more_screen/items/item_details_screen.dart';
 import 'package:cbs_erp_project/screens/more_screen/items/model/item_response.dart';
 import 'package:cbs_erp_project/screens/more_screen/items/provider/item_view_model.dart';
+import 'package:cbs_erp_project/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -42,12 +43,13 @@ class _AllItemsScreenState extends ConsumerState<AllItemsScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFF6F7FB),
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         title: const Text(
           'Items',
-          style: TextStyle(fontWeight: FontWeight.w700),
+          style: TextStyle(fontWeight: FontWeight.w700, color: Colors.white),
         ),
         elevation: 0,
-        backgroundColor: const Color(0xFFF6F7FB),
+        backgroundColor: AppColors.primaryColors,
         foregroundColor: Colors.black87,
       ),
       body: Column(

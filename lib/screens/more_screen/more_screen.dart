@@ -3,6 +3,7 @@ import 'package:cbs_erp_project/screens/common_widget/pager_wrapper.dart';
 import 'package:cbs_erp_project/screens/home_screen/model/recent_items_model.dart';
 import 'package:cbs_erp_project/screens/login_screen/model/auth_model.dart';
 import 'package:cbs_erp_project/screens/more_screen/items/all_items_screen.dart';
+import 'package:cbs_erp_project/screens/more_screen/unit_measure/unit_measure_screen.dart';
 import 'package:cbs_erp_project/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -18,20 +19,23 @@ class MoreScreen extends StatefulWidget {
 class _MoreScreenState extends State<MoreScreen> {
   final List<RecentItemsModel> settingListItems = [
     RecentItemsModel(
-      icon: Icons.wallet_giftcard,
+      id: 1,
+      icon: Icons.food_bank_rounded,
       itemName: 'Account Types',
       txnId: '',
       price: '',
       status: '',
     ),
     RecentItemsModel(
-      icon: Icons.wallet_giftcard,
+      id: 2,
+      icon: Icons.wallet,
       itemName: 'Customer Setup',
       txnId: '',
       price: '',
       status: '',
     ),
     RecentItemsModel(
+      id: 3,
       icon: Icons.wallet_giftcard,
       itemName: 'Account Setup',
       txnId: '',
@@ -39,6 +43,7 @@ class _MoreScreenState extends State<MoreScreen> {
       status: '',
     ),
     RecentItemsModel(
+      id: 4,
       icon: Icons.wallet_giftcard,
       itemName: 'Item Category',
       txnId: '',
@@ -46,6 +51,7 @@ class _MoreScreenState extends State<MoreScreen> {
       status: '',
     ),
     RecentItemsModel(
+      id: 5,
       icon: Icons.wallet_giftcard,
       itemName: 'Units Of Measure',
       txnId: '',
@@ -53,6 +59,7 @@ class _MoreScreenState extends State<MoreScreen> {
       status: '',
     ),
     RecentItemsModel(
+      id: 6,
       icon: Icons.wallet_giftcard,
       itemName: 'Items',
       txnId: '',
@@ -110,8 +117,30 @@ class _MoreScreenState extends State<MoreScreen> {
                     borderRadius = BorderRadius.zero;
                   }
                   return InkWell(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const AllItemsScreen()));
+                    onTap: () {
+                      switch (item.id) {
+                        case 5: {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const UnitMeasureScreen(),
+                            ),
+                          );
+                          break;
+                        }
+                        case 6:
+                          {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const AllItemsScreen(),
+                              ),
+                            );
+                            break;
+                          }
+                        default :
+                          print("Empty items");
+                      }
                     },
                     child: Container(
                       height: 65,
@@ -140,16 +169,26 @@ class _MoreScreenState extends State<MoreScreen> {
                                     width: 40,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
-                                      color: AppColors.primaryColors.withAlpha(40)
+                                      color: AppColors.primaryColors.withAlpha(
+                                        40,
+                                      ),
                                     ),
-                                    child: Icon(item.icon,size: 20, color: AppColors.primaryColors,),
+                                    child: Icon(
+                                      item.icon,
+                                      size: 20,
+                                      color: AppColors.primaryColors,
+                                    ),
                                   ),
-                                  const SizedBox(width: 10,),
-                                  CustomTextView.normalTextView(item.itemName, Colors.black87, false)
+                                  const SizedBox(width: 10),
+                                  CustomTextView.normalTextView(
+                                    item.itemName,
+                                    Colors.black87,
+                                    false,
+                                  ),
                                 ],
                               ),
                             ),
-                            Icon(Icons.keyboard_arrow_right_outlined)
+                            Icon(Icons.keyboard_arrow_right_outlined),
                           ],
                         ),
                       ),

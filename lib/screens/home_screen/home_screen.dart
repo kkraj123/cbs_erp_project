@@ -19,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final List<RecentItemsModel> recentItemList = [
     RecentItemsModel(
+      id: 1,
       icon: Icons.shopify_outlined,
       itemName: 'Wireless Mouse',
       txnId: 'TXN_9900',
@@ -26,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
       status: 'Pending',
     ),
     RecentItemsModel(
+      id: 2,
       icon: Icons.shopify_outlined,
       itemName: 'Wireless Mouse',
       txnId: 'TXN_9900',
@@ -33,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       status: 'Pending',
     ),
     RecentItemsModel(
+      id: 3,
       icon: Icons.shopify_outlined,
       itemName: 'Wireless Mouse',
       txnId: 'TXN_9900',
@@ -40,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
       status: 'Pending',
     ),
     RecentItemsModel(
+      id: 4,
       icon: Icons.shopify_outlined,
       itemName: 'Wireless Mouse',
       txnId: 'TXN_9900',
@@ -47,6 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
       status: 'Pending',
     ),
     RecentItemsModel(
+      id: 5,
       icon: Icons.shopify_outlined,
       itemName: 'Wireless Mouse',
       txnId: 'TXN_9900',
