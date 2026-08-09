@@ -2,6 +2,8 @@ import 'package:cbs_erp_project/custom_widgets/custom_text_view.dart';
 import 'package:cbs_erp_project/screens/common_widget/pager_wrapper.dart';
 import 'package:cbs_erp_project/screens/home_screen/model/recent_items_model.dart';
 import 'package:cbs_erp_project/screens/login_screen/model/auth_model.dart';
+import 'package:cbs_erp_project/screens/more_screen/category_items/add_category_items.dart';
+import 'package:cbs_erp_project/screens/more_screen/category_items/category_item_screen.dart';
 import 'package:cbs_erp_project/screens/more_screen/items/all_items_screen.dart';
 import 'package:cbs_erp_project/screens/more_screen/unit_measure/unit_measure_screen.dart';
 import 'package:cbs_erp_project/themes/app_colors.dart';
@@ -119,6 +121,15 @@ class _MoreScreenState extends State<MoreScreen> {
                   return InkWell(
                     onTap: () {
                       switch (item.id) {
+                        case 4: {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const CategoryItemScreen(),
+                            ),
+                          );
+                          break;
+                        }
                         case 5: {
                           Navigator.push(
                             context,

@@ -43,7 +43,7 @@ class CustomToolbar extends StatelessWidget implements PreferredSizeWidget {
                             ),
                             Expanded(
                               child: Text(
-                                "TradeMaster",
+                                "ERP",
                                 style: TextStyle(
                                   color: AppColors.primaryColors,
                                   fontFamily: 'Barlow',

@@ -1,7 +1,7 @@
 import 'package:cbs_erp_project/custom_widgets/custom_appbar.dart';
 import 'package:cbs_erp_project/custom_widgets/custom_text_view.dart';
 import 'package:cbs_erp_project/network/core/network/api_state.dart';
-import 'package:cbs_erp_project/network/support/error_handler.dart';
+import 'package:cbs_erp_project/screens/more_screen/unit_measure/add_unit_item_screen.dart';
 import 'package:cbs_erp_project/screens/more_screen/unit_measure/model/unit_measure_response_model.dart';
 import 'package:cbs_erp_project/screens/more_screen/unit_measure/providers/unit_measure_view_model.dart';
 import 'package:cbs_erp_project/themes/app_colors.dart';
@@ -36,6 +36,14 @@ class _UnitMeasureScreenState extends ConsumerState<UnitMeasureScreen> {
               .getAllUnitMeasureItems(),
           child: _buildUnitListItems(state, context),
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: AppColors.primaryColors,
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => AddUnitItemScreen()));
+        },
+        icon: const Icon(Icons.add, color: Colors.white,),
+        label: const Text('Add Unit', style: TextStyle(color: Colors.white),),
       ),
     );
   }
@@ -79,7 +87,7 @@ class _UnitMeasureScreenState extends ConsumerState<UnitMeasureScreen> {
                     children: [
                       CustomTextView.normalTextView(
                         "${units.unitName} (${units.unitNameLocale})",
-                        Colors.grey,
+                        Colors.black,
                         false,
                       ),
                       Container(
@@ -112,7 +120,7 @@ class _UnitMeasureScreenState extends ConsumerState<UnitMeasureScreen> {
                       color: Colors.white,
                     ),
                     child: Padding(
-                      padding: EdgeInsets.all(5),
+                      padding: EdgeInsets.only(left: 10, top: 5, bottom: 5),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,7 +133,10 @@ class _UnitMeasureScreenState extends ConsumerState<UnitMeasureScreen> {
                             ),
                           ),
                           const SizedBox(height: 10,),
-                          CustomTextView.normalTextView("${units.unitName} Factor : ${units.conversionFactor}", Colors.black, false)
+                          CustomTextView.normalTextView("Conversion Factor : ${units.conversionFactor}", Colors.black, false),
+                          const SizedBox(height: 5,),
+                          CustomTextView.normalTextView("Description : ${units.description}", Colors.black, false)
+
                         ],
                       ),
                     ),

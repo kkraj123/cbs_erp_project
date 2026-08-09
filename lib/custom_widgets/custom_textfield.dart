@@ -54,7 +54,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               fontWeight: FontWeight.w600,
               color: _isFocused
                   ? widget.focusedBorderColor
-                  : Colors.white,
+                  : Colors.grey,
             ),
           ),
           const SizedBox(height: 6),
@@ -77,7 +77,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               ),
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 16,
-                vertical: 14,
+                vertical: 15,
               ),
 
               prefixIcon: widget.prefixIcon != null

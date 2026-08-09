@@ -41,6 +41,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  const SizedBox(height: 20,),
                   Text(
                     widget.itemDetails.itemName ?? '-',
                     maxLines: 1,

@@ -1,5 +1,6 @@
 import 'package:cbs_erp_project/custom_widgets/custom_text_view.dart';
 import 'package:cbs_erp_project/network/core/network/api_state.dart';
+import 'package:cbs_erp_project/screens/home_screen/add_items_screen.dart';
 import 'package:cbs_erp_project/screens/more_screen/items/item_details_screen.dart';
 import 'package:cbs_erp_project/screens/more_screen/items/model/item_response.dart';
 import 'package:cbs_erp_project/screens/more_screen/items/provider/item_view_model.dart';
@@ -68,9 +69,12 @@ class _AllItemsScreenState extends ConsumerState<AllItemsScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
-        icon: const Icon(Icons.add),
-        label: const Text('Add Item'),
+        backgroundColor: AppColors.primaryColors,
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => AddItemsScreen()));
+        },
+        icon: const Icon(Icons.add, color: Colors.white,),
+        label: const Text('Add Item', style: TextStyle(color: Colors.white),),
       ),
     );
   }
