@@ -223,7 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const AddItemsScreen(),
+                            builder: (context) =>  AddItemsScreen(user: widget.authModel.user!),
                           ),
                         );
                       },
@@ -250,7 +250,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const AllItemsScreen(),
+                            builder: (context) =>  AllItemsScreen(user: widget.authModel.user!,),
                           ),
                         );
                       },

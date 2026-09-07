@@ -1,6 +1,7 @@
 import 'package:cbs_erp_project/custom_widgets/custom_appbar.dart';
 import 'package:cbs_erp_project/custom_widgets/custom_text_view.dart';
 import 'package:cbs_erp_project/network/core/network/api_state.dart';
+import 'package:cbs_erp_project/screens/login_screen/model/auth_model.dart';
 import 'package:cbs_erp_project/screens/more_screen/unit_measure/add_unit_item_screen.dart';
 import 'package:cbs_erp_project/screens/more_screen/unit_measure/model/unit_measure_response_model.dart';
 import 'package:cbs_erp_project/screens/more_screen/unit_measure/providers/unit_measure_view_model.dart';
@@ -9,7 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UnitMeasureScreen extends ConsumerStatefulWidget {
-  const UnitMeasureScreen({super.key});
+  final User user;
+
+  const UnitMeasureScreen({super.key, required this.user});
 
   @override
   ConsumerState<UnitMeasureScreen> createState() => _UnitMeasureScreenState();
@@ -29,21 +32,23 @@ class _UnitMeasureScreenState extends ConsumerState<UnitMeasureScreen> {
     final state = ref.watch(getUnitMeasureProvider);
     return Scaffold(
       appBar: CustomAppbar(title: 'Units Of Measure'),
-      body: Expanded(
-        child: RefreshIndicator(
-          onRefresh: () => ref
-              .read(getUnitMeasureProvider.notifier)
-              .getAllUnitMeasureItems(),
-          child: _buildUnitListItems(state, context),
-        ),
+      body: RefreshIndicator(
+        onRefresh: () =>
+            ref.read(getUnitMeasureProvider.notifier).getAllUnitMeasureItems(),
+        child: _buildUnitListItems(state, context),
       ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: AppColors.primaryColors,
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => AddUnitItemScreen()));
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddUnitItemScreen(user: widget.user),
+            ),
+          );
         },
-        icon: const Icon(Icons.add, color: Colors.white,),
-        label: const Text('Add Unit', style: TextStyle(color: Colors.white),),
+        icon: const Icon(Icons.add, color: Colors.white),
+        label: const Text('Add Unit', style: TextStyle(color: Colors.white)),
       ),
     );
   }
@@ -132,11 +137,18 @@ class _UnitMeasureScreenState extends ConsumerState<UnitMeasureScreen> {
                               false,
                             ),
                           ),
-                          const SizedBox(height: 10,),
-                          CustomTextView.normalTextView("Conversion Factor : ${units.conversionFactor}", Colors.black, false),
-                          const SizedBox(height: 5,),
-                          CustomTextView.normalTextView("Description : ${units.description}", Colors.black, false)
-
+                          const SizedBox(height: 10),
+                          CustomTextView.normalTextView(
+                            "Conversion Factor : ${units.conversionFactor}",
+                            Colors.black,
+                            false,
+                          ),
+                          const SizedBox(height: 5),
+                          CustomTextView.normalTextView(
+                            "Description : ${units.description}",
+                            Colors.black,
+                            false,
+                          ),
                         ],
                       ),
                     ),

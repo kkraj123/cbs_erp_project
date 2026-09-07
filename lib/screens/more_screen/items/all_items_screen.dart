@@ -1,6 +1,7 @@
 import 'package:cbs_erp_project/custom_widgets/custom_text_view.dart';
 import 'package:cbs_erp_project/network/core/network/api_state.dart';
 import 'package:cbs_erp_project/screens/home_screen/add_items_screen.dart';
+import 'package:cbs_erp_project/screens/login_screen/model/auth_model.dart';
 import 'package:cbs_erp_project/screens/more_screen/items/item_details_screen.dart';
 import 'package:cbs_erp_project/screens/more_screen/items/model/item_response.dart';
 import 'package:cbs_erp_project/screens/more_screen/items/provider/item_view_model.dart';
@@ -9,7 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AllItemsScreen extends ConsumerStatefulWidget {
-  const AllItemsScreen({super.key});
+  final User user;
+
+  const AllItemsScreen({super.key, required this.user});
 
   @override
   ConsumerState<AllItemsScreen> createState() => _AllItemsScreenState();
@@ -71,10 +74,15 @@ class _AllItemsScreenState extends ConsumerState<AllItemsScreen> {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: AppColors.primaryColors,
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => AddItemsScreen()));
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddItemsScreen(user: widget.user),
+            ),
+          );
         },
-        icon: const Icon(Icons.add, color: Colors.white,),
-        label: const Text('Add Item', style: TextStyle(color: Colors.white),),
+        icon: const Icon(Icons.add, color: Colors.white),
+        label: const Text('Add Item', style: TextStyle(color: Colors.white)),
       ),
     );
   }

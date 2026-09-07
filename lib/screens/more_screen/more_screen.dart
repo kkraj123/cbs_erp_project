@@ -125,7 +125,7 @@ class _MoreScreenState extends State<MoreScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const CategoryItemScreen(),
+                              builder: (context) =>  CategoryItemScreen(user: widget.authModel.user!,),
                             ),
                           );
                           break;
@@ -134,7 +134,7 @@ class _MoreScreenState extends State<MoreScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const UnitMeasureScreen(),
+                              builder: (context) =>  UnitMeasureScreen(user: widget.authModel.user!,),
                             ),
                           );
                           break;
@@ -144,7 +144,7 @@ class _MoreScreenState extends State<MoreScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const AllItemsScreen(),
+                                builder: (context) =>  AllItemsScreen(user: widget.authModel.user!,),
                               ),
                             );
                             break;

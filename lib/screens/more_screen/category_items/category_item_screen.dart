@@ -1,9 +1,11 @@
+import 'package:cbs_erp_project/screens/login_screen/model/auth_model.dart';
 import 'package:cbs_erp_project/screens/more_screen/category_items/add_category_items.dart';
 import 'package:cbs_erp_project/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CategoryItemScreen extends StatefulWidget {
-  const CategoryItemScreen({super.key});
+  final User user;
+  const CategoryItemScreen({super.key, required this.user});
 
   @override
   State<CategoryItemScreen> createState() => _CategoryItemScreenState();
@@ -23,7 +25,7 @@ class _CategoryItemScreenState extends State<CategoryItemScreen> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddCategoryItems()),
+            MaterialPageRoute(builder: (context) => AddCategoryItems(user: widget.user,)),
           );
         },
         icon: const Icon(Icons.add, color: Colors.white,),
