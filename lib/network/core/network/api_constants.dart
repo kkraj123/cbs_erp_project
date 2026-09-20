@@ -21,6 +21,7 @@ class ApiConstants {
 
   static String categoryItemsTypeEndPoint = "/api/ErpApi/GetItemTypes";
   static String categorySaveItemEndPoint = "/api/ErpApi/SaveItemCategory";
+  static String categoryByIsLogicEndPoint = "/api/ErpApi/GetItemCategoriesByIsLogical";
 
 
 

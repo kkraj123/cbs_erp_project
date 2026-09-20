@@ -35,28 +35,61 @@ final itemsTypeProvider =
       return CategoryViewModel(categoryRepo: ref.watch(items));
     });
 
-class SaveCategoryVM extends StateNotifier<ApiState<CategorySaveItemResponse>>{
+class SaveCategoryVM extends StateNotifier<ApiState<CategorySaveItemResponse>> {
   final CategoryRepo categoryRepo;
+
   SaveCategoryVM({required this.categoryRepo}) : super(ApiState.initial());
 
-  saveCategoryItem(Map<String, dynamic> bodyParams) async{
+  saveCategoryItem(Map<String, dynamic> bodyParams) async {
     state = ApiState.loading();
-    try{
+    try {
       final saveItemResponse = await categoryRepo.saveCategoryItems(bodyParams);
       state = ApiState.success(saveItemResponse);
-    }on AppException catch(e) {
+    } on AppException catch (e) {
       state = ApiState.error(e.message);
-    }catch(e){
+    } catch (e) {
       state = ApiState.error(e.toString());
     }
   }
 }
+
 final saveItems = Provider<CategoryRepo>((ref) {
   return CategoryRepo(networkService: ref.watch(networkServiceProvider));
 });
 final saveCategoryProvider =
-StateNotifierProvider<SaveCategoryVM, ApiState<CategorySaveItemResponse>>((
-    ref,
+    StateNotifierProvider<SaveCategoryVM, ApiState<CategorySaveItemResponse>>((
+      ref,
     ) {
-  return SaveCategoryVM(categoryRepo: ref.watch(saveItems));
+      return SaveCategoryVM(categoryRepo: ref.watch(saveItems));
+    });
+
+class CategoryByLogicViewModel
+    extends StateNotifier<ApiState<CategoryItemsByLogic>> {
+  final CategoryRepo categoryRepo;
+
+  CategoryByLogicViewModel({required this.categoryRepo})
+    : super(ApiState.loading());
+
+  getCategoryByLogicItems() async {
+    state = ApiState.loading();
+    try {
+      final categoryByLogicResponse = await categoryRepo.getCategoryByLogic();
+      state = ApiState.success(categoryByLogicResponse);
+    } on AppException catch (e) {
+      state = ApiState.error(e.message);
+    } catch (e) {
+      state = ApiState.error(e.toString());
+    }
+  }
+}
+
+final categoryByLogic = Provider<CategoryRepo>((ref) {
+  return CategoryRepo(networkService: ref.watch(networkServiceProvider));
 });
+final categoryByLogicProvider =
+    StateNotifierProvider<
+      CategoryByLogicViewModel,
+      ApiState<CategoryItemsByLogic>
+    >((ref) {
+      return CategoryByLogicViewModel(categoryRepo: ref.watch(saveItems));
+    });
