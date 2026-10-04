@@ -238,15 +238,17 @@ class _AddCategoryItemsState extends ConsumerState<AddCategoryItems> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) {
+      builder: (dialogContext) {
         return AlertDialog(
           title: const Text('Success'),
           content: Text(data?.msg ?? ''),
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
-                if (data?.success == true) {}
+                Navigator.of(dialogContext).pop();
+                if (data?.success == true && mounted) {
+                  Navigator.of(context).pop(true);
+                }
               },
               child: Text('Ok'),
             ),

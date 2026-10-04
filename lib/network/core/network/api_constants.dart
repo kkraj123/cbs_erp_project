@@ -23,6 +23,8 @@ class ApiConstants {
   static String categorySaveItemEndPoint = "/api/ErpApi/SaveItemCategory";
   static String categoryByIsLogicEndPoint = "/api/ErpApi/GetItemCategoriesByIsLogical";
 
+  static String accountTypeEndPoint = "/api/ErpApi/GetAccountTypes";
+  static String finTypeListEndPoint = "/api/ErpApi/GetFinTypeCategoryList";
 
 
 }

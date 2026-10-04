@@ -9,6 +9,8 @@ import 'package:cbs_erp_project/screens/more_screen/unit_measure/unit_measure_sc
 import 'package:cbs_erp_project/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
+import 'accout_types/account_type_screen.dart';
+
 class MoreScreen extends StatefulWidget {
   final AuthModel authModel;
 
@@ -121,35 +123,53 @@ class _MoreScreenState extends State<MoreScreen> {
                   return InkWell(
                     onTap: () {
                       switch (item.id) {
-                        case 4: {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>  CategoryItemScreen(user: widget.authModel.user!,),
-                            ),
-                          );
+                        case 1:
+                          {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AccountTypeScreen(user: widget.authModel.user! ,),
+                              ),
+                            );
+                          }
                           break;
-                        }
-                        case 5: {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>  UnitMeasureScreen(user: widget.authModel.user!,),
-                            ),
-                          );
-                          break;
-                        }
+                        case 4:
+                          {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CategoryItemScreen(
+                                  user: widget.authModel.user!,
+                                ),
+                              ),
+                            );
+                            break;
+                          }
+                        case 5:
+                          {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => UnitMeasureScreen(
+                                  user: widget.authModel.user!,
+                                ),
+                              ),
+                            );
+                            break;
+                          }
                         case 6:
                           {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>  AllItemsScreen(user: widget.authModel.user!,),
+                                builder: (context) => AllItemsScreen(
+                                  user: widget.authModel.user!,
+                                ),
                               ),
                             );
                             break;
                           }
-                        default :
+                        default:
                           print("Empty items");
                       }
                     },
